@@ -5,6 +5,12 @@ export default defineNuxtConfig({
     devtools: { enabled: true },
     modules: ["@nuxt/fonts", "@nuxt/icon", "@nuxt/image"],
     css: ["~/assets/css/main.css"],
+    nitro: {
+        prerender: {
+            routes: ["/"],
+        },
+    },
+    ssr: false,
     vite: {
         plugins: [tailwindcss()],
     },
