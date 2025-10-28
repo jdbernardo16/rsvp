@@ -4,6 +4,8 @@
 
     <save-the-date />
 
+    <video-section />
+
     <our-story />
 
     <couple-details />
@@ -13,8 +15,6 @@
     <event-timeline />
 
     <location-frame />
-
-    <video-section />
 
     <entourage-frame />
 </template>

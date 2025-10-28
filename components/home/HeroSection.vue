@@ -1,12 +1,39 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { ref, onMounted, onUnmounted } from "vue";
+
+const heroImage = ref<HTMLElement | null>(null);
+const scrollY = ref(0);
+
+const handleScroll = () => {
+    scrollY.value = window.scrollY;
+    if (heroImage.value) {
+        heroImage.value.style.transform = `translateY(${
+            scrollY.value * 0.5
+        }px) scale(1.1)`;
+    }
+};
+
+onMounted(() => {
+    window.addEventListener("scroll", handleScroll);
+});
+
+onUnmounted(() => {
+    window.removeEventListener("scroll", handleScroll);
+});
+</script>
 <template>
     <section>
-        <div class="relative h-screen">
-            <img
-                class="w-full h-full object-cover"
-                src="/images/DSC09755.JPG"
-                alt="Dannica & James"
-            />
+        <div class="relative h-[60vh] md:h-screen overflow-hidden">
+            <div
+                ref="heroImage"
+                class="absolute inset-0 w-full h-full will-change-transform"
+            >
+                <img
+                    class="w-full h-full object-cover md:object-center object-right"
+                    src="/images/DSC09755.JPG"
+                    alt="Dannica & James"
+                />
+            </div>
             <div
                 class="absolute inset-0 bg-gradient-to-r from-brown/80 via-brown/40 to-transparent"
             ></div>
@@ -15,11 +42,23 @@
             >
                 <div class="text-center md:text-left">
                     <h1
-                        class="text-white text-5xl md:text-7xl font-light font-secondary mb-6 text-shadow-lg"
+                        class="text-white text-5xl md:text-8xl font-light font-secondary mb-6 tracking-wide animate-fade-in-up"
                     >
-                        Dannica
-                        <span class="font-normal">&</span>
-                        James
+                        <span
+                            class="inline-block transform hover:scale-105 transition-transform duration-300"
+                        >
+                            Dannica
+                        </span>
+                        <span
+                            class="font-normal mx-2 md:mx-3 text-pink-200 inline-block animate-pulse"
+                        >
+                            &
+                        </span>
+                        <span
+                            class="inline-block transform hover:scale-105 transition-transform duration-300"
+                        >
+                            James
+                        </span>
                     </h1>
                     <p
                         class="text-white/90 text-normal md:text-lg font-light leading-relaxed mb-8 max-w-2xl mx-auto md:mx-0"
